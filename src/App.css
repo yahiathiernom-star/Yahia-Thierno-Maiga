@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #a020f0, #ff6a00);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.test {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.test h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+/* COUNTER BOX */
+.counter-box {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.counter-box h1 {
+  border: none;
+  margin: 0 0 0.5rem;
+}
+
+.count {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/* BOUTONS */
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-add, .btn-remove, .btn-toggle {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-add {
+  background: white;
+  color: #a020f0;
+}
+
+.btn-remove {
+  background: white;
+  color: #ff6a00;
+}
+
+.btn-toggle {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-add:hover, .btn-remove:hover, .btn-toggle:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* SECTION HEADER */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+  padding-bottom: 0.5rem;
+}
+
+.section-header h1 {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+/* GRILLE */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
