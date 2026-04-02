@@ -1,0 +1,51 @@
+.page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.page h1 { font-size: 2.5rem; color: white; margin-bottom: 1rem; }
+
+.desc {
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature {
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.feature span { font-size: 1.4rem; }
+
+.apiBox {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.apiBox h2 { color: white; margin-bottom: 1rem; font-size: 1.1rem; }
+
+.loading { color: rgba(255,255,255,0.4); }
+
+.task p { color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+.task span { color: #a020f0; font-weight: 600; }

@@ -1,71 +1,59 @@
-import { useState } from 'react'
-import UserProfile from './../component/UserProfile'
-import MoviesList from './../component/MoviesList'
+import { useState, useEffect } from 'react';
+import TaskCard from '../component/TaskCard';
+import TaskForm from '../component/TaskForm';
+import styles from './Home.module.css';
 
 function Home() {
-    const [counter, setCounter] = useState(0);
-    const [showUsers, setShowUsers] = useState(true);
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Finir le projet React', priority: 'Haute', done: false },
+    { id: 2, title: 'Réviser useEffect', priority: 'Moyenne', done: false },
+    { id: 3, title: 'Pousser sur GitHub', priority: 'Haute', done: false },
+  ]);
 
-    const users = [
-        { firstName: "Yahia", lastName: "Maiga", birthdate: "28/04" },
-        { firstName: "Yaqub", lastName: "Maiga", birthdate: "13/04" },
-        { firstName: "Jimel", lastName: "Toure", birthdate: "03/07" },
-        { firstName: "Aminata", lastName: "Konate", birthdate: "12/08" },
-    ];
+  const [filter, setFilter] = useState('Toutes');
 
-    const films = [
-        { filmname: "Le Roi Lion", datedesortie: "1994", genre: "Animation / Aventure", syno: "Simba, un jeune lion, doit reprendre sa place de roi après la mort de son père." },
-        { filmname: "Titanic", datedesortie: "1997", genre: "Drame / Romance", syno: "Jack et Rose tombent amoureux sur le Titanic, un paquebot voué à couler." },
-        { filmname: "Spiderman", datedesortie: "2002", genre: "Super-héros / Action", syno: "Peter Parker est mordu par une araignée et devient Spider-Man pour sauver New York." },
-    ];
-    return (
-        <>
-            <div>
-                <h1>Home</h1>
-                <p>this is Home page </p>
-            </div>
-            <div className='test'>
-                <div className='counter-box'>
-                    <h1>Counter</h1>
-                    <p className='count'>{counter}</p>
-                    <div className='btn-group'>
-                        <button className='btn-add' onClick={() => setCounter(counter + 1)}>+ Ajouter</button>
-                        <button className='btn-remove' onClick={() => setCounter(counter === 0 ? 0 : counter - 1)}>− Enlever</button>
-                    </div>
-                </div>
-                <div className='section-header'>
-                    <h1>Les utilisateurs</h1>
-                    <button className='btn-toggle' onClick={() => setShowUsers(!showUsers)}>
-                        {showUsers ? 'Cacher' : 'Afficher'}
-                    </button>
-                </div>
+  useEffect(() => {
+    document.title = `Tâches (${tasks.filter(t => !t.done).length} restantes)`;
+  }, [tasks]);
 
-                <div className='grid'>
-                    {showUsers && users.map((user, id) => (
-                        <UserProfile
-                            key={id}
-                            firstName={user.firstName}
-                            lastName={user.lastName}
-                            birthdate={user.birthdate}
-                        />
-                    ))}
-                </div>
+  function addTask(title, priority) {
+    setTasks([...tasks, { id: Date.now(), title, priority, done: false }]);
+  }
 
-                <h1>Les films</h1>
-                <div className='grid'>
-                    {films.map((film, id) => (
-                        <MoviesList
-                            key={id}
-                            filmname={film.filmname}
-                            datedesortie={film.datedesortie}
-                            genre={film.genre}
-                            syno={film.syno}
-                        />
-                    ))}
-                </div>
+  function toggleTask(id) {
+    setTasks(tasks.map(t => t.id === id ? { ...t, done: !t.done } : t));
+  }
 
-            </div>
-        </>
-    );
+  function deleteTask(id) {
+    setTasks(tasks.filter(t => t.id !== id));
+  }
+
+  const filtered = tasks.filter(t => {
+    if (filter === 'Toutes') return true;
+    if (filter === 'À faire') return !t.done;
+    if (filter === 'Terminées') return t.done;
+  });
+
+  return (
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <h1>Mes <span>tâches</span></h1>
+        <p className={styles.subtitle}>{tasks.filter(t => !t.done).length} tâche(s) restante(s)</p>
+      </div>
+      <TaskForm onAdd={addTask} />
+      <div className={styles.filters}>
+        {['Toutes', 'À faire', 'Terminées'].map(f => (
+          <button key={f} className={`${styles.filterBtn} ${filter === f ? styles.active : ''}`} onClick={() => setFilter(f)}>{f}</button>
+        ))}
+      </div>
+      <div className={styles.list}>
+        {filtered.length === 0 && <p className={styles.empty}>Aucune tâche ici 👌</p>}
+        {filtered.map(task => (
+          <TaskCard key={task.id} task={task} onToggle={toggleTask} onDelete={deleteTask} />
+        ))}
+      </div>
+    </div>
+  );
 }
+
 export default Home;
