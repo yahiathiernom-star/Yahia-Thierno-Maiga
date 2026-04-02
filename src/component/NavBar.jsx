@@ -1,22 +1,17 @@
-import { NavLink } from "react-router";
+import { NavLink } from 'react-router';
+import styles from './NavBar.module.css';
 
-function NavBar(){
-    return(
-        <nav>
-            <h1>Hetic</h1>
-            <div>
-                <NavLink
-                    to="/Home"
-                >
-                    Home
-                </NavLink> 
-                <NavLink
-                    to="/About"
-                >
-                    About
-                </NavLink>    
-            </div>
-        </nav>
-    )
+function NavBar() {
+  return (
+    <nav className={styles.nav}>
+      <h2 className={styles.logo}>Hetic</h2>
+      <div className={styles.links}>
+        <NavLink to="/Home" className={({ isActive }) => isActive ? styles.active : ''}>Home</NavLink>
+        <NavLink to="/About" className={({ isActive }) => isActive ? styles.active : ''}>About</NavLink>
+        <NavLink to="/Contact" className={({ isActive }) => isActive ? styles.active : ''}>Contact</NavLink>
+      </div>
+    </nav>
+  );
 }
-export default NavBar
+
+export default NavBar;
